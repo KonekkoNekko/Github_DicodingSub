@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">GithubUserApp</string>
+    <string name="tv_name">Name</string>
+    <string name="tvUser">Username</string>
+    <string name="sb_search">Cari Username Github</string>
+    <string name="tv_follower">Followers</string>
+    <string name="tv_following">Following</string>
+    <string name="tv_number"></string>
+    <string name="tab_text_1">Follower</string>
+    <string name="tab_text_2">Following</string>
+</resources>
