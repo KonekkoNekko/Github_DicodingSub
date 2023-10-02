@@ -18,10 +18,9 @@ class MainActivity : AppCompatActivity() {
     private val mainViewModel by viewModels<MainViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        Thread.sleep(1000)
-        installSplashScreen()
         setContentView(binding.root)
 
         supportActionBar?.hide()

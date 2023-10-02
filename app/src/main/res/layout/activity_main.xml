@@ -61,7 +61,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|end"
             android:layout_marginEnd="16dp"
+            android:contentDescription="@string/descCont_ivUser"
             android:src="@drawable/search_black_24dp" />
+        <!-- Penambahan contentDescription sesuai saran dari Submission sebelumnya -->
 
     </FrameLayout>
 

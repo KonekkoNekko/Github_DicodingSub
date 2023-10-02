@@ -15,14 +15,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 class DetailActivity : AppCompatActivity() {
-    companion object{
-        const val EXTRA_USERNAME = "extra_username"
-        @StringRes
-        private val TAB_TITLES = intArrayOf(
-            R.string.tab_text_1,
-            R.string.tab_text_2
-        )
-    }
+
     private lateinit var binding: ActivityDetailBinding
     private val detailViewModel by viewModels<DetailViewModel>()
 
@@ -40,7 +33,7 @@ class DetailActivity : AppCompatActivity() {
         val username = intent.getStringExtra(EXTRA_USERNAME)
 
         detailViewModel.setUserDetail(username.toString())
-        detailViewModel.detail.observe(this){
+        detailViewModel.detail.observe(this) {
             binding.apply {
                 Glide.with(binding.root).load(it.avatarUrl)
                     .transition(DrawableTransitionOptions.withCrossFade()).centerCrop().circleCrop()
@@ -57,7 +50,7 @@ class DetailActivity : AppCompatActivity() {
         val viewPager: ViewPager2 = binding.viewPager
         viewPager.adapter = sectionPagerAdapter
         val tabs: TabLayout = binding.tabs
-        TabLayoutMediator(tabs, viewPager) {tab, position ->
+        TabLayoutMediator(tabs, viewPager) { tab, position ->
             tab.text = resources.getText(TAB_TITLES[position])
         }.attach()
 
@@ -65,5 +58,15 @@ class DetailActivity : AppCompatActivity() {
 
     private fun showLoading(isLoading: Boolean) {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
+    companion object {
+        const val EXTRA_USERNAME = "extra_username"
+
+        @StringRes
+        private val TAB_TITLES = intArrayOf(
+            R.string.tab_text_1,
+            R.string.tab_text_2
+        )
     }
 }

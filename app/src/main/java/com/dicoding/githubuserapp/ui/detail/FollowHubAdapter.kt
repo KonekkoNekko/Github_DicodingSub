@@ -1,6 +1,5 @@
 package com.dicoding.githubuserapp.ui.detail
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -8,12 +7,11 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.dicoding.githubuserapp.data.response.FollowingResponseItem
+import com.dicoding.githubuserapp.data.response.FollowsResponseItem
 import com.dicoding.githubuserapp.databinding.ItemUserBinding
 
-
-class FollowingAdapter(private val itemClickListener: OnItemClickListener) :
-    ListAdapter<FollowingResponseItem, FollowingAdapter.MyViewHolder>(DIFF_CALLBACK) {
+class FollowHubAdapter (private val itemClickListener: OnItemClickListener) :
+    ListAdapter<FollowsResponseItem, FollowHubAdapter.MyViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding = ItemUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -37,8 +35,7 @@ class FollowingAdapter(private val itemClickListener: OnItemClickListener) :
             }
         }
 
-        fun bind(user: FollowingResponseItem) {
-            Log.d("cekisiadapterahay", user.toString())
+        fun bind(user: FollowsResponseItem) {
             Glide.with(binding.root).load(user.avatarUrl)
                 .transition(DrawableTransitionOptions.withCrossFade()).centerCrop().circleCrop()
                 .into(binding.ivUser)
@@ -48,17 +45,17 @@ class FollowingAdapter(private val itemClickListener: OnItemClickListener) :
     }
 
     companion object {
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<FollowingResponseItem>() {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<FollowsResponseItem>() {
             override fun areItemsTheSame(
-                oldItem: FollowingResponseItem,
-                newItem: FollowingResponseItem
+                oldItem: FollowsResponseItem,
+                newItem: FollowsResponseItem
             ): Boolean {
                 return oldItem.id == newItem.id
             }
 
             override fun areContentsTheSame(
-                oldItem: FollowingResponseItem,
-                newItem: FollowingResponseItem
+                oldItem: FollowsResponseItem,
+                newItem: FollowsResponseItem
             ): Boolean {
                 return oldItem == newItem
             }
@@ -66,6 +63,6 @@ class FollowingAdapter(private val itemClickListener: OnItemClickListener) :
     }
 
     interface OnItemClickListener {
-        fun onItemClick(user: FollowingResponseItem)
+        fun onItemClick(user: FollowsResponseItem)
     }
 }

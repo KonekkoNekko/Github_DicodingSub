@@ -1,5 +1,6 @@
 package com.dicoding.githubuserapp.ui.detail
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,13 +10,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.dicoding.githubuserapp.data.response.FollowersResponseItem
-import com.dicoding.githubuserapp.data.response.FollowingResponseItem
+import com.dicoding.githubuserapp.data.response.FollowsResponseItem
 import com.dicoding.githubuserapp.databinding.FragmentFollowerFollowingBinding
 
-class FollowerFollowingFragment : Fragment() {
+class FollowsHubFragment : Fragment() {
     private lateinit var binding: FragmentFollowerFollowingBinding
-    private val followerFollowingViewModel by viewModels<FollowerFollowingViewModel>()
+    private val followsHubViewModel by viewModels<FollowsHubViewModel>()
     private var username: String? = null
     private var isFollower: Boolean? = null
 
@@ -29,7 +29,7 @@ class FollowerFollowingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        followerFollowingViewModel.isLoading.observe(requireActivity()) {
+        followsHubViewModel.isLoading.observe(requireActivity()) {
             showLoading(it)
         }
 
@@ -38,39 +38,36 @@ class FollowerFollowingFragment : Fragment() {
         val itemDecoration = DividerItemDecoration(requireActivity(), layoutManager.orientation)
         binding.rvFollow.addItemDecoration(itemDecoration)
 
-        val adapterA = FollowerAdapter(object : FollowerAdapter.OnItemClickListener {
-            override fun onItemClick(user: FollowersResponseItem) {
-                TODO("Not yet implemented")
-            }
-        })
-
-        val adapterB = FollowingAdapter(object : FollowingAdapter.OnItemClickListener {
-            override fun onItemClick(user: FollowingResponseItem) {
-                TODO("Not yet implemented")
+        val adapter = FollowHubAdapter(object : FollowHubAdapter.OnItemClickListener {
+            override fun onItemClick(user: FollowsResponseItem) {
+                Intent(activity, DetailActivity::class.java).also {
+                    it.putExtra(DetailActivity.EXTRA_USERNAME, user.login)
+                    startActivity(it)
+                }
             }
         })
 
 // Before the if statement
-        binding.rvFollow.adapter = adapterA // Set the adapterA by default
+        binding.rvFollow.adapter = adapter // Set the adapterA by default
 
         if (arguments != null) {
             isFollower = requireArguments().getBoolean("Follower")
             username = requireArguments().getString("Username")
             if (isFollower!!) {
-                followerFollowingViewModel.getFollower(username!!)
-                followerFollowingViewModel.followerListUser.observe(viewLifecycleOwner) { listFollower ->
+                followsHubViewModel.getFollower(username!!)
+                followsHubViewModel.followerListUser.observe(viewLifecycleOwner) { listFollower ->
                     Log.d("cek isi list follower", listFollower.toString())
-                    adapterA.submitList(listFollower)
+                    adapter.submitList(listFollower)
                 }
                 Log.d("masuk IF", isFollower.toString())
                 Log.d("masuk IF", username.toString())
             } else {
-                followerFollowingViewModel.getFollowing(username!!)
-                followerFollowingViewModel.followingListUser.observe(viewLifecycleOwner) { listFollowing ->
+                followsHubViewModel.getFollowing(username!!)
+                followsHubViewModel.followingListUser.observe(viewLifecycleOwner) { listFollowing ->
                     Log.d("cek isi list following", listFollowing.toString())
-                    adapterB.submitList(listFollowing)
+                    adapter.submitList(listFollowing)
                 }
-                binding.rvFollow.adapter = adapterB // Set the adapterB for following scenario
+                binding.rvFollow.adapter = adapter // Set the adapterB for following scenario
                 Log.d("masuk ELSE", isFollower.toString())
                 Log.d("masuk ELSE", username.toString())
             }

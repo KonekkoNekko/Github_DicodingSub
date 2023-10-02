@@ -19,7 +19,7 @@ class SectionsPagerAdapter(activity: AppCompatActivity) : FragmentStateAdapter(a
         var fragment: Fragment? = null
         when(position){
             0 -> {
-                fragment = FollowerFollowingFragment()
+                fragment = FollowsHubFragment()
                 val bundle = Bundle()
                 bundle.putString("Username", username)
                 bundle.putBoolean("Follower", true)
@@ -27,7 +27,7 @@ class SectionsPagerAdapter(activity: AppCompatActivity) : FragmentStateAdapter(a
 
             }
             1 -> {
-                fragment = FollowerFollowingFragment()
+                fragment = FollowsHubFragment()
                 val bundle = Bundle()
                 bundle.putString("Username", username)
                 bundle.putBoolean("Follower", false)

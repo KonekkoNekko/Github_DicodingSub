@@ -26,10 +26,11 @@
             android:layout_width="125dp"
             android:layout_height="125dp"
             android:layout_marginTop="32dp"
+            android:contentDescription="@string/descCont_ivUser"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@drawable/logo" />
+            app:layout_constraintTop_toTopOf="parent" />
+        <!--        Penambahan content Description sesuai arahan Dicoding -->
 
         <TextView
             android:id="@+id/tv_user_name"
@@ -109,15 +110,15 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp">
 
-<!--        <com.google.android.material.tabs.TabItem-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@string/tv_follower" />-->
+        <!--        <com.google.android.material.tabs.TabItem-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:text="@string/tv_follower" />-->
 
-<!--        <com.google.android.material.tabs.TabItem-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@string/tv_following" />-->
+        <!--        <com.google.android.material.tabs.TabItem-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:text="@string/tv_following" />-->
     </com.google.android.material.tabs.TabLayout>
 
     <androidx.viewpager2.widget.ViewPager2

@@ -1,11 +1,13 @@
 <resources>
-    <string name="app_name">GithubUserApp</string>
+    <string name="app_name">Cari Gwehj di Github</string>
     <string name="tv_name">Name</string>
     <string name="tvUser">Username</string>
     <string name="sb_search">Cari Username Github</string>
     <string name="tv_follower">Followers</string>
     <string name="tv_following">Following</string>
-    <string name="tv_number"></string>
+    <string name="tv_number">Nan</string>
     <string name="tab_text_1">Follower</string>
     <string name="tab_text_2">Following</string>
+    <string name="descCont_ivUser">Gambar Profile Picture User yang bersangkutan</string>
+    <string name="descCont_ivSearch">Image View berikut untuk eksekusi fungsi Search</string>
 </resources>

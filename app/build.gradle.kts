@@ -15,6 +15,8 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "TOKEN_KEY", "\"b650046bf640e7bf7054093854b8d02a\"")
+        buildConfigField("String", "BASE_URL", "\"https://api.github.com/\"")
     }
 
     buildTypes {
@@ -36,6 +38,7 @@ android {
 
     buildFeatures{
         viewBinding = true
+        buildConfig = true
     }
 }
 
@@ -58,7 +61,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0")
     implementation("androidx.activity:activity-ktx:1.3.1")
     implementation("androidx.fragment:fragment-ktx:1.3.1")
-    implementation("com.github.bumptech.glide:glide:4.11.0")
+    implementation("com.github.bumptech.glide:glide:4.16.0") //Update versi dari 4.11.0 -> 4.16.0 sesuai komentar dari Dicoding
     implementation("androidx.viewpager2:viewpager2:1.0.0")
 
     // Splash API
