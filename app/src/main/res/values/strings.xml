@@ -5,9 +5,14 @@
     <string name="sb_search">Cari Username Github</string>
     <string name="tv_follower">Followers</string>
     <string name="tv_following">Following</string>
+    <string name="mode">Switch Mode</string>
+    <string name="favorite">Favorite</string>
     <string name="tv_number">Nan</string>
     <string name="tab_text_1">Follower</string>
     <string name="tab_text_2">Following</string>
     <string name="descCont_ivUser">Gambar Profile Picture User yang bersangkutan</string>
     <string name="descCont_ivSearch">Image View berikut untuk eksekusi fungsi Search</string>
+    <string name="descCont_ivFav">Favorite Indicator Purposes</string>
+    <string name="tagFav">Tagged</string>
+    <string name="untagFav">Untagged</string>
 </resources>

@@ -7,11 +7,11 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.dicoding.githubuserapp.data.response.FollowsResponseItem
+import com.dicoding.githubuserapp.data.remote.response.FollowsResponseItem
 import com.dicoding.githubuserapp.databinding.ItemUserBinding
 
-class FollowHubAdapter (private val itemClickListener: OnItemClickListener) :
-    ListAdapter<FollowsResponseItem, FollowHubAdapter.MyViewHolder>(DIFF_CALLBACK) {
+class FollowsHubAdapter (private val itemClickListener: OnItemClickListener) :
+    ListAdapter<FollowsResponseItem, FollowsHubAdapter.MyViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding = ItemUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)

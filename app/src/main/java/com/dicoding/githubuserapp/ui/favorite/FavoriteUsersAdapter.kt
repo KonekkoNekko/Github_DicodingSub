@@ -1,4 +1,4 @@
-package com.dicoding.githubuserapp.ui
+package com.dicoding.githubuserapp.ui.favorite
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,11 +7,11 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.dicoding.githubuserapp.data.remote.response.ItemsItem
+import com.dicoding.githubuserapp.data.remote.response.FollowsResponseItem
 import com.dicoding.githubuserapp.databinding.ItemUserBinding
 
-class UserAdapter(private val itemClickListener: OnItemClickListener) :
-    ListAdapter<ItemsItem, UserAdapter.MyViewHolder>(DIFF_CALLBACK) {
+class FavoriteUsersAdapter (private val itemClickListener: OnItemClickListener) :
+    ListAdapter<FollowsResponseItem, FavoriteUsersAdapter.MyViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding = ItemUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -35,28 +35,33 @@ class UserAdapter(private val itemClickListener: OnItemClickListener) :
             }
         }
 
-        fun bind(user: ItemsItem) {
+        fun bind(user: FollowsResponseItem) {
             Glide.with(binding.root).load(user.avatarUrl)
                 .transition(DrawableTransitionOptions.withCrossFade()).centerCrop().circleCrop()
                 .into(binding.ivUser)
             binding.tvName.text = user.login
-            binding.tvUser.text = user.type
         }
     }
 
     companion object {
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<ItemsItem>() {
-            override fun areItemsTheSame(oldItem: ItemsItem, newItem: ItemsItem): Boolean {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<FollowsResponseItem>() {
+            override fun areItemsTheSame(
+                oldItem: FollowsResponseItem,
+                newItem: FollowsResponseItem
+            ): Boolean {
                 return oldItem.id == newItem.id
             }
 
-            override fun areContentsTheSame(oldItem: ItemsItem, newItem: ItemsItem): Boolean {
+            override fun areContentsTheSame(
+                oldItem: FollowsResponseItem,
+                newItem: FollowsResponseItem
+            ): Boolean {
                 return oldItem == newItem
             }
         }
     }
 
     interface OnItemClickListener {
-        fun onItemClick(user: ItemsItem)
+        fun onItemClick(user: FollowsResponseItem)
     }
 }

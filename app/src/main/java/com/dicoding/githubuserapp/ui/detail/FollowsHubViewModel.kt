@@ -4,8 +4,8 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.dicoding.githubuserapp.data.response.FollowsResponseItem
-import com.dicoding.githubuserapp.data.retrofit.ApiConfig
+import com.dicoding.githubuserapp.data.remote.response.FollowsResponseItem
+import com.dicoding.githubuserapp.data.remote.retrofit.ApiConfig
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -36,7 +36,7 @@ class FollowsHubViewModel : ViewModel() {
                 if (response.isSuccessful) {
                     _followingListUser.value = response.body() ?: emptyList()
                 } else {
-                    Log.e(FollowsHubViewModel.TAG, "Gagal: ${response.message()}")
+                    Log.e(TAG, "Gagal: ${response.message()}")
                 }
             }
 
@@ -58,13 +58,13 @@ class FollowsHubViewModel : ViewModel() {
                 if (response.isSuccessful) {
                     _followerListUser.value = response.body() ?: emptyList()
                 } else {
-                    Log.e(FollowsHubViewModel.TAG, "onFailure: ${response.message()}")
+                    Log.e(TAG, "onFailure: ${response.message()}")
                 }
             }
 
             override fun onFailure(call: Call<List<FollowsResponseItem>>, t: Throwable) {
                 _isLoading.value = false
-                Log.e(FollowsHubViewModel.TAG, "onFailure: ${t.message}")
+                Log.e(TAG, "onFailure: ${t.message}")
             }
         })
     }

@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.dicoding.githubuserapp.data.response.FollowsResponseItem
+import com.dicoding.githubuserapp.data.remote.response.FollowsResponseItem
 import com.dicoding.githubuserapp.databinding.FragmentFollowerFollowingBinding
 
 class FollowsHubFragment : Fragment() {
@@ -22,7 +22,7 @@ class FollowsHubFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentFollowerFollowingBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -38,7 +38,7 @@ class FollowsHubFragment : Fragment() {
         val itemDecoration = DividerItemDecoration(requireActivity(), layoutManager.orientation)
         binding.rvFollow.addItemDecoration(itemDecoration)
 
-        val adapter = FollowHubAdapter(object : FollowHubAdapter.OnItemClickListener {
+        val adapter = FollowsHubAdapter(object : FollowsHubAdapter.OnItemClickListener {
             override fun onItemClick(user: FollowsResponseItem) {
                 Intent(activity, DetailActivity::class.java).also {
                     it.putExtra(DetailActivity.EXTRA_USERNAME, user.login)
