@@ -1,5 +1,6 @@
 package com.dicoding.githubuserapp.switchmode
 
+import android.util.Log.*
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
@@ -15,5 +16,6 @@ class SwitchModeViewModel(private val pref: SettingPreferences) : ViewModel() {
         viewModelScope.launch {
             pref.saveThemeSetting(isDarkModeActive)
         }
+        d("isDarkModeActive_viewmodel", isDarkModeActive.toString())
     }
 }

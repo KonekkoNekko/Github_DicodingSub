@@ -3,6 +3,7 @@ package com.dicoding.githubuserapp.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.view.Menu
 import android.view.MenuItem
@@ -55,6 +56,8 @@ class MainActivity : AppCompatActivity() {
             false
         }
 
+        setTheme()
+
         val adapter = UserAdapter(object : UserAdapter.OnItemClickListener {
             override fun onItemClick(user: ItemsItem) {
                 Intent(this@MainActivity, DetailActivity::class.java).also {
@@ -72,18 +75,36 @@ class MainActivity : AppCompatActivity() {
         binding.rvUser.adapter = adapter
     }
 
+    private fun setTheme() {
+        val pref = SettingPreferences.getInstance(application.dataStore)
+        val switchModeViewModel = ViewModelProvider(
+            this,
+            ViewModelFactory(pref)
+        )[SwitchModeViewModel::class.java]
+        switchModeViewModel.getThemeSettings().observe(this) { isDarkModeActive: Boolean ->
+            if (isDarkModeActive) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
+            }
+        }
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.option_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
+        when (item.itemId) {
             R.id.favorite_menu -> {
                 Intent(this, FavoriteUsersActivity::class.java).also {
                     startActivity(it)
                 }
             }
+
             R.id.switch_mode -> {
                 isSwitchModeChecked = !isSwitchModeChecked
                 item.isChecked = isSwitchModeChecked
@@ -93,6 +114,7 @@ class MainActivity : AppCompatActivity() {
                     ViewModelFactory(pref)
                 )[SwitchModeViewModel::class.java]
                 switchModeViewModel.getThemeSettings().observe(this) { isDarkModeActive: Boolean ->
+                    Log.d("isDarkMode_mainActivity", isDarkModeActive.toString())
                     isSwitchModeChecked = if (isDarkModeActive) {
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                         true
